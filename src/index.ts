@@ -1,13 +1,13 @@
-import express from "express";
-import { dbConfig } from "./config";
-import { appConfig } from "./app";
-import environmentvariables from "./config/environmentvariables";
+import express, { Application } from "express";
+import { AppConfig } from "./app";
+import { DbConfig } from "./config/db";
+import { environmentVariables } from "./config/environmentvariables";
 
 const app = express();
 
-dbConfig();
-appConfig(app);
+AppConfig(app);
+DbConfig();
 
-app.listen(environmentvariables.Port, () => {
-  console.log("server is running");
+app.listen(environmentVariables.Port, () => {
+  console.log(`Listening on Port`);
 });

@@ -1,10 +1,7 @@
 import dotenv from "dotenv";
-
 dotenv.config();
 
-const environmentvariables = {
+export const environmentVariables = {
   Port: process.env.Port!,
-  MongoDb_String_Local: process.env.MongoDb_String_Local!,
+  mongouri: process.env.MongoDb_String_Local!,
 };
-
-export default environmentvariables;

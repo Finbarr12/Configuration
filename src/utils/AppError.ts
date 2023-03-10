@@ -15,7 +15,7 @@ export enum HttpCode {
   GATE_TIMEOUT = 504,
 }
 
-interface ErrorArgs {
+interface ArgsError {
   name?: string;
   isOperational?: boolean;
   message: string;
@@ -26,13 +26,13 @@ export class AppError extends Error {
   public readonly name: string;
   public readonly isOperational: boolean = true;
   public readonly httpCode: HttpCode;
-  constructor(args: ErrorArgs) {
+  constructor(args: ArgsError) {
     super(args.message);
 
     Object.setPrototypeOf(this, new.target.prototype);
 
-    this.httpCode = args.httpCode;
     this.name = args.name || "Error";
+    this.httpCode = args.httpCode;
 
     if (args.isOperational !== undefined) {
       this.isOperational = args.isOperational;

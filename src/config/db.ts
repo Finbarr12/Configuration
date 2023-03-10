@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
-import environmentvariables from "./environmentvariables";
+import { environmentVariables } from "./environmentvariables";
 
-const Db = environmentvariables.MongoDb_String_Local;
+const DbUri = environmentVariables.mongouri;
 
-export const dbConfig = async () => {
+export const DbConfig = async () => {
   try {
-    const con = await mongoose.connect(Db);
-    console.log(`server is connected to ${con.connection.host}`);
+    const connected = await mongoose.connect(DbUri);
+    console.log(`Db connected to ${connected.connection.host}`);
   } catch (error) {
-    console.log("Error", error);
+    console.log("An error occured", error);
   }
 };
