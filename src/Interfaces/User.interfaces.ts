@@ -4,5 +4,6 @@ export interface Iuser extends Document {
   name: string;
   email: string;
   password: string;
+  confirmPassword: string;
   role: string;
 }

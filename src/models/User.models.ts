@@ -19,6 +19,12 @@ const UserSchema: Schema<Iuser> = new Schema(
     password: {
       type: String,
       minlength: [7, "Pasword minimum of six characters"],
+      required: [true, "Input password"],
+    },
+    confirmPassword: {
+      type: String,
+      required: [true, "Input password"],
+      minlength: [7, "Pasword minimum of six characters"],
     },
     role: {
       enum: ["user", "admin", "manager"],
