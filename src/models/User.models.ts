@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import { Iuser } from "../Interfaces/User.interfaces";
 import isEmail from "validator/lib/isEmail";
+import bcrypt from "bcrypt";
 
 const UserSchema: Schema<Iuser> = new Schema(
   {
@@ -34,6 +35,15 @@ const UserSchema: Schema<Iuser> = new Schema(
   },
   { timestamps: true }
 );
+
+UserSchema.pre("save", async function (next) {
+  let user = this;
+  if (!user.isModified("password")) next();
+
+  const salt = await bcrypt.genSalt(12);
+  user.password = await bcrypt.hash(user.password, salt);
+  user.confirmPassword = user.password;
+});
 
 const Usermodel = model<Iuser>("user", UserSchema);
 
